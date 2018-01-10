@@ -1,5 +1,7 @@
-<ul *ngIf="data">
-  <li *ngFor="let bin of data.bins">
-    {{ bin.freq }} - {{ bin.avg | number:'0.0-0' }}€
-  </li>
-</ul>
+<div class="legendgram-container">
+  <ul class="legendgram" *ngIf="data">
+    <li class="legendgram-bar" *ngFor="let bin of data.bins" [ngStyle]="getBarStyle(bin)">
+      <span>{{ bin.avg | number:'0.0-0' }}€</span>
+    </li>
+  </ul>
+</div>

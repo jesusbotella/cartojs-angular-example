@@ -1,0 +1,37 @@
+.legendgram-container {
+    margin: 5px;
+    height: 39vh;
+}
+
+.legendgram {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: flex-end;
+
+    list-style-type: none;
+
+    .legendgram-bar {
+        position: relative;
+        flex: 1 0 70px;
+        max-width: 70px;
+        margin: 0 1px;
+
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+
+        span {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translate3d(-50%, 0, 0);
+
+            font-size: 14px;
+            color: #fff;
+            text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+    }
+}

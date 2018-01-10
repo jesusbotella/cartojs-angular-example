@@ -4,7 +4,8 @@ import * as carto from 'carto.js';
 
 @Component({
   selector: 'widget',
-  templateUrl: './widget.component.html'
+  templateUrl: './widget.component.html',
+  styleUrls: ['./widget.component.scss']
 })
 export class WidgetComponent implements OnInit {
   @Input() map: Map;
@@ -16,15 +17,18 @@ export class WidgetComponent implements OnInit {
   @Output() onDataChanged: EventEmitter<any> = new EventEmitter();
 
   data: any;
+  binsMaxValue: number;
+  barColors: Array<string> = ['#fcde9c', '#faa476', '#f0746e', '#e34f6f', '#dc3977', '#b9257a', '#7c1d6f'];
 
   constructor() {}
 
   ngOnInit() {
     let sqlSource = new carto.source.SQL(this.source);
-    let histogram = new carto.dataview.Histogram(sqlSource, this.column, { bins: this.bins});
+    let histogram = new carto.dataview.Histogram(sqlSource, this.column, { bins: this.bins });
 
     histogram.on('dataChanged', data => {
       this.data = data;
+      this.binsMaxValue = this.getMaxBinOccurrences(data.bins);
       this.onDataChanged.emit(data);
     });
 
@@ -32,6 +36,19 @@ export class WidgetComponent implements OnInit {
     histogram.addFilter(bboxFilter);
 
     this.client.addDataview(histogram);
+  }
+
+  getBarStyle(bin) {
+    if (!bin) return {};
+
+    return {
+      height: Math.round(bin.freq * 100 / this.binsMaxValue) + '%',
+      'background-color': this.barColors[bin.bin]
+    };
+  }
+
+  getMaxBinOccurrences(bins) {
+    return bins.reduce((maxValue, currentBin) => maxValue > currentBin.freq ? maxValue : currentBin.freq, 0);
   }
 
 }
