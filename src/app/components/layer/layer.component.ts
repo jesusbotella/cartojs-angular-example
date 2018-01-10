@@ -19,7 +19,8 @@ export class LayerComponent implements OnInit {
 
   constructor() { }
 
-  async ngOnInit() {
+  ngOnInit() {
+    console.log('ngInit layer');
     if (!this.layerSource || !this.layerStyle) return;
 
     this.cartoSource = new carto.source.SQL(this.layerSource);
@@ -27,7 +28,7 @@ export class LayerComponent implements OnInit {
 
     this.layer = new carto.layer.Layer(this.cartoSource, this.cartoCSS);
 
-    await this.client.addLayer(this.layer)
+    this.client.addLayer(this.layer)
     this.client.getLeafletLayer().addTo(this.map);
   }
 

@@ -1,5 +1,20 @@
 <carto-map [center]="[40.42, -3.7]" zoom="13" (onMapCreated)="onMapCreated($event)">
-  <basemap url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}.png" [leafletMap]="map"></basemap>
-  <layer [map]="map" [client]="cartoClient" [layerSource]="layerSource" [layerStyle]="layerStyle"></layer>
+  <basemap
+    url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}.png"
+    [leafletMap]="map">
+  </basemap>
+
+  <layer
+    [map]="map"
+    [client]="cartoClient"
+    [layerSource]="layerSource"
+    [layerStyle]="layerStyle">
+  </layer>
 </carto-map>
-<widget></widget>
+
+<widget
+  [client]="cartoClient"
+  [source]="layerSource"
+  column="price"
+  [bin]="7">
+</widget>
