@@ -1,3 +1,5 @@
-<p>
-  {{ data | json }}
-</p>
+<ul *ngIf="data">
+  <li *ngFor="let bin of data.bins">
+    {{ bin.freq }} - {{ bin.avg | number:'0.0-0' }}€
+  </li>
+</ul>
