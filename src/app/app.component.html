@@ -1,8 +1,8 @@
 <main>
   <carto-map [center]="[40.42, -3.7]" zoom="13" (onMapCreated)="onMapCreated($event)">
     <basemap
-      url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}.png"
-      [leafletMap]="map">
+      [map]="map"
+      url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}.png">
     </basemap>
 
     <layer

@@ -16,10 +16,9 @@ export class LayerComponent implements OnInit {
   cartoSource: any;
   cartoCSS: any;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
-    console.log('ngInit layer');
     if (!this.layerSource || !this.layerStyle) return;
 
     this.cartoSource = new carto.source.SQL(this.layerSource);
@@ -38,5 +37,4 @@ export class LayerComponent implements OnInit {
     this.cartoCSS.setContent(this.layerStyle)
     .then(() => this.layer.show());
   }
-
 }

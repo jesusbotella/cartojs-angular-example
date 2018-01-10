@@ -6,15 +6,14 @@ import { Map, TileLayer } from 'leaflet';
   template: ''
 })
 export class BasemapComponent implements OnInit {
+  @Input() map: Map;
   @Input() url: string;
-  @Input() leafletMap: Map;
 
   constructor() { }
 
   ngOnInit() {
-    if (!this.url) return;
+    if (!this.map) return;
 
-    new TileLayer(this.url).addTo(this.leafletMap);
+    new TileLayer(this.url).addTo(this.map);
   }
-
 }

@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 import { Map } from 'leaflet';
 import * as carto from 'carto.js';
-import 'leaflet/dist/leaflet';
 
 import { buildStyle } from './utils/style';
 
 @Component({
-  selector: 'app-root',
+  selector: 'app',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
@@ -25,16 +24,18 @@ export class AppComponent {
     }
   `;
 
-  onMapCreated(map) {
-    this.map = map;
+  constructor() {
     this.cartoClient = new carto.Client({
       apiKey: 'YOUR_API_KEY_HERE',
       username: 'ramirocartodb'
     });
   }
 
+  onMapCreated(map) {
+    this.map = map;
+  }
+
   onWidgetDataChanged(data) {
-    const stlye = buildStyle(data, ['#fcde9c', '#faa476', '#f0746e', '#e34f6f', '#dc3977', '#b9257a', '#7c1d6f']);
-    this.layerStyle = stlye;
+    this.layerStyle = buildStyle(data, ['#fcde9c', '#faa476', '#f0746e', '#e34f6f', '#dc3977', '#b9257a', '#7c1d6f']);
   }
 }

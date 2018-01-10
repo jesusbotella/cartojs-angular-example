@@ -20,20 +20,18 @@ export class WidgetComponent implements OnInit {
   binsMaxValue: number;
   barColors: Array<string> = ['#fcde9c', '#faa476', '#f0746e', '#e34f6f', '#dc3977', '#b9257a', '#7c1d6f'];
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
+    const boundingBoxFilter = new carto.filter.BoundingBoxLeaflet(this.map);
     const sqlSource = new carto.source.SQL(this.source);
-    const histogram = new carto.dataview.Histogram(sqlSource, this.column, { bins: this.bins });
 
+    const histogram = new carto.dataview.Histogram(sqlSource, this.column, { bins: this.bins });
+    histogram.addFilter(boundingBoxFilter);
     histogram.on('dataChanged', data => {
       this.data = data;
-      this.binsMaxValue = this.getMaxBinOccurrences(data.bins);
       this.onDataChanged.emit(data);
     });
-
-    const bboxFilter = new carto.filter.BoundingBoxLeaflet(this.map);
-    histogram.addFilter(bboxFilter);
 
     this.client.addDataview(histogram);
   }
@@ -48,9 +46,4 @@ export class WidgetComponent implements OnInit {
       background: this.barColors[bin.bin]
     };
   }
-
-  getMaxBinOccurrences(bins) {
-    return bins.reduce((maxValue, currentBin) => maxValue > currentBin.freq ? maxValue : currentBin.freq, 0);
-  }
-
 }

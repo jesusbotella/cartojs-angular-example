@@ -23,5 +23,4 @@ export class MapComponent implements OnInit {
 
     this.onMapCreated.emit(this.map);
   }
-
 }
