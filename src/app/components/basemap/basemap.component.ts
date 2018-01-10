@@ -3,8 +3,7 @@ import { Map, TileLayer } from 'leaflet';
 
 @Component({
   selector: 'basemap',
-  templateUrl: './basemap.component.html',
-  styleUrls: ['./basemap.component.scss']
+  templateUrl: './basemap.component.html'
 })
 export class BasemapComponent implements OnInit {
   @Input() url: string;

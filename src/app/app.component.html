@@ -13,8 +13,10 @@
 </carto-map>
 
 <widget
+  [map]="map"
   [client]="cartoClient"
   [source]="layerSource"
   column="price"
-  [bin]="7">
+  [bins]="7"
+  (onDataChanged)="onWidgetDataChanged($event)">
 </widget>

@@ -4,8 +4,7 @@ import * as carto from 'carto.js';
 
 @Component({
   selector: 'layer',
-  templateUrl: './layer.component.html',
-  styleUrls: ['./layer.component.scss']
+  templateUrl: './layer.component.html'
 })
 export class LayerComponent implements OnInit {
   @Input() map: Map;
@@ -27,9 +26,17 @@ export class LayerComponent implements OnInit {
     this.cartoCSS = new carto.style.CartoCSS(this.layerStyle);
 
     this.layer = new carto.layer.Layer(this.cartoSource, this.cartoCSS);
+    this.layer.hide();
 
     this.client.addLayer(this.layer)
     this.client.getLeafletLayer().addTo(this.map);
+  }
+
+  ngOnChanges() {
+    if (!this.layer) return;
+
+    this.cartoCSS.setContent(this.layerStyle)
+    .then(() => this.layer.show());
   }
 
 }

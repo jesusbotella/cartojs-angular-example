@@ -1,31 +1,35 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Map } from 'leaflet';
 import * as carto from 'carto.js';
-import { EventEmitter } from 'selenium-webdriver';
 
 @Component({
   selector: 'widget',
-  templateUrl: './widget.component.html',
-  styleUrls: ['./widget.component.scss']
+  templateUrl: './widget.component.html'
 })
 export class WidgetComponent implements OnInit {
+  @Input() map: Map;
   @Input() client: any;
   @Input() source: any;
   @Input() column: string;
-  @Input() bin: number;
+  @Input() bins: number;
+
+  @Output() onDataChanged: EventEmitter<any> = new EventEmitter();
 
   data: any;
 
   constructor() {}
 
   ngOnInit() {
-    console.log('ngInit widget');
     let sqlSource = new carto.source.SQL(this.source);
-    let histogram = new carto.dataview.Histogram(sqlSource, this.column);
+    let histogram = new carto.dataview.Histogram(sqlSource, this.column, { bins: this.bins});
 
     histogram.on('dataChanged', data => {
       this.data = data;
-      console.log(data);
+      this.onDataChanged.emit(data);
     });
+
+    const bboxFilter = new carto.filter.BoundingBoxLeaflet(this.map);
+    histogram.addFilter(bboxFilter);
 
     this.client.addDataview(histogram);
   }
