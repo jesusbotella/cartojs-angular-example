@@ -1,6 +1,0 @@
-<ul *ngIf="data" class="Histogram-bins">
-  <li class="Histogram-bin" *ngFor="let bin of data.bins">
-    <span class="Histogram-bin--fill" [ngStyle]="getBarStyle(bin)"></span>
-    <span class="Histogram-bin--text">{{bin.avg | number:"0.0-0"}} €</span>
-  </li>
-</ul>
