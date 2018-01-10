@@ -3,7 +3,7 @@ import { Map } from 'leaflet';
 import * as carto from 'carto.js';
 
 @Component({
-  selector: 'widget',
+  selector: 'app-widget',
   templateUrl: './widget.component.html',
   styleUrls: ['./widget.component.scss']
 })
@@ -20,11 +20,11 @@ export class WidgetComponent implements OnInit {
   binsMaxValue: number;
   barColors: Array<string> = ['#fcde9c', '#faa476', '#f0746e', '#e34f6f', '#dc3977', '#b9257a', '#7c1d6f'];
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit() {
-    let sqlSource = new carto.source.SQL(this.source);
-    let histogram = new carto.dataview.Histogram(sqlSource, this.column, { bins: this.bins });
+    const sqlSource = new carto.source.SQL(this.source);
+    const histogram = new carto.dataview.Histogram(sqlSource, this.column, { bins: this.bins });
 
     histogram.on('dataChanged', data => {
       this.data = data;
@@ -39,11 +39,13 @@ export class WidgetComponent implements OnInit {
   }
 
   getBarStyle(bin) {
-    if (!bin) return {};
+    if (!bin) {
+      return {};
+    }
 
     return {
-      height: Math.round(bin.freq * 100 / this.binsMaxValue) + '%',
-      'background-color': this.barColors[bin.bin]
+      height: bin.normalized * 100 + '%',
+      background: this.barColors[bin.bin]
     };
   }
 

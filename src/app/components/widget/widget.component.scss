@@ -1,37 +1,47 @@
-.legendgram-container {
-    margin: 5px;
-    height: 39vh;
+:host {
+  background: #333;
+  width: 100%;
+  margin: auto;
+  height: 200px;
+  overflow: auto;
 }
 
-.legendgram {
-    margin: 0;
-    padding: 0;
-    height: 100%;
+.Histogram-bins {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  align-items: flex-end;
+  justify-content: space-evenly;
+}
 
-    display: flex;
-    flex-wrap: nowrap;
-    align-items: flex-end;
+.Histogram-bin {
+  background: #444;
+  margin-right: 4px;
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
 
-    list-style-type: none;
+.Histogram-bin:last-child {
+  margin-right: 0;
+}
 
-    .legendgram-bar {
-        position: relative;
-        flex: 1 0 70px;
-        max-width: 70px;
-        margin: 0 1px;
+.Histogram-bin--text {
+  color: white;
+  position: absolute;
+  bottom: 0px;
+  padding: 0.5rem;
+  width: 100%;
+  text-align: center;
+  font-size: 1.4rem;
+}
 
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
-
-        span {
-            position: absolute;
-            bottom: 10px;
-            left: 50%;
-            transform: translate3d(-50%, 0, 0);
-
-            font-size: 14px;
-            color: #fff;
-            text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        }
-    }
+.Histogram-bin--fill {
+  background: #F0CD53;
+  width: 100%;
+  color: white;
+  position: absolute;
+  bottom: 0;
 }

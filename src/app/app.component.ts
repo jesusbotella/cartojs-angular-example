@@ -27,7 +27,6 @@ export class AppComponent {
 
   onMapCreated(map) {
     this.map = map;
-    console.log(carto);
     this.cartoClient = new carto.Client({
       apiKey: 'YOUR_API_KEY_HERE',
       username: 'ramirocartodb'
@@ -35,6 +34,7 @@ export class AppComponent {
   }
 
   onWidgetDataChanged(data) {
-    this.layerStyle = buildStyle(data, ['#fcde9c', '#faa476', '#f0746e', '#e34f6f', '#dc3977', '#b9257a', '#7c1d6f']);
+    const stlye = buildStyle(data, ['#fcde9c', '#faa476', '#f0746e', '#e34f6f', '#dc3977', '#b9257a', '#7c1d6f']);
+    this.layerStyle = stlye;
   }
 }
