@@ -4,7 +4,7 @@ import * as carto from 'carto.js';
 
 @Component({
   selector: 'layer',
-  templateUrl: './layer.component.html'
+  template: ''
 })
 export class LayerComponent implements OnInit {
   @Input() map: Map;
