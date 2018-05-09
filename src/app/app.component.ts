@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Map } from 'leaflet';
-import * as carto from 'carto.js';
+import * as carto from '@carto/carto.js';
 
 import { buildStyle } from './utils/style';
 
