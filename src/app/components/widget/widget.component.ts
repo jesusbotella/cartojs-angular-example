@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Map } from 'leaflet';
-import * as carto from 'carto.js';
+import * as carto from '@carto/carto.js';
 
 @Component({
   selector: 'app-widget',
